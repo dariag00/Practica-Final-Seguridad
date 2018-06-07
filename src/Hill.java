@@ -4,12 +4,15 @@ import java.util.ArrayList;
 public class Hill {
 
     int claveCifrado[][];
+    int claveDescifrado[][];
     String alfabeto;
+
 
 
     public Hill(String alfabeto) {
         this.claveCifrado = claveCifrado;
         this.alfabeto = alfabeto;
+        this.claveDescifrado = claveDescifrado;
     }
 
     public int[][] getClaveCifrado() {
@@ -19,6 +22,15 @@ public class Hill {
     public void setClaveCifrado(int[][] claveCifrado) {
         this.claveCifrado = claveCifrado;
     }
+
+    public int[][] getClaveDescifrado() {
+        return claveDescifrado;
+    }
+
+    public void setClaveDescifrado(int[][] claveDescifrado) {
+        this.claveDescifrado = claveDescifrado;
+    }
+
 
     public String getAlfabeto() {
         return alfabeto;
@@ -38,12 +50,12 @@ public class Hill {
         // Separamos el mensaje en 4
         int contador = 0;
         int determinante = 0;
-        int[][] adjunta = new int[2][2];
+       /* int[][] adjunta = new int[2][2];
         adjunta[0][0] = this.claveCifrado[1][1];
         adjunta[1][1] = this.claveCifrado[0][0];
-        adjunta[0][1] = this.claveCifrado[0][1];
-        adjunta[1][0] = this.claveCifrado[1][0];
-        ArrayList<String> palabros = new ArrayList<>();
+        adjunta[0][1] = -this.claveCifrado[0][1];
+        adjunta[1][0] = -this.claveCifrado[1][0];
+        */ArrayList<String> palabros = new ArrayList<>();
         int inverso = 0;
 
         for(int i = 0; i<mensaje.length(); i++) {
@@ -92,17 +104,17 @@ public class Hill {
                     }
                 }
             }else {
-                determinante = determinant(this.claveCifrado, 2);
+               /* determinante = determinant(this.claveCifrado, 2);
 
                 inverso = euclidesExtendido(determinante, 27);
                 System.out.println("Determinante " + determinante);
-                System.out.println("Inverso " + inverso);
+                */System.out.println("Inverso " + inverso);
 
-                resultadoArrays = multiply(cifrar, adjunta);
+                resultadoArrays = multiply(cifrar, this.claveDescifrado);
 
                 for (int k = 0; k < 2; k++) {
                     for (int j = 0; j < 2; j++) {
-                        resultadoArrays[k][j] = (resultadoArrays[k][j] * inverso) % this.alfabeto.length();
+                       // resultadoArrays[k][j] = (resultadoArrays[k][j] * inverso) % this.alfabeto.length();
                         resultALetra[k][j] = numToLetra((resultadoArrays[k][j]), this.alfabeto);
                     }
                 }
